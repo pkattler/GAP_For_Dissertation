@@ -1,7 +1,11 @@
 R := PolynomialRing(Integers,"n");
 AssignGeneratorVariables( R );
+Rs := PolynomialRing(Integers,"s");
+AssignGeneratorVariables( Rs );
+Rt := PolynomialRing(Integers,"t");
+AssignGeneratorVariables( Rt );
 
-Print("L0: \n");
+Print("\n\n\n The orbit of O^1_n: \n\n\n");
 Print("direction = (2n+1, 2):\n");
 
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) 
@@ -24,7 +28,7 @@ cyl1 := [ [ 1, 1, 1, 1 ], [ 2*n, 2*n, 2*n-1, 2*n+1 ] ];
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
-Print("direction = (1, 0)\n");
+Print("Direction = (1, 0):\n");
 
 combLength1 := [  n , n+1  ];
 combWidths1 := [  1, 1  ];
@@ -34,15 +38,15 @@ cyl1 := [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ] ];
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
-Print("L1: \n");
-Print("n = 6*i-4, direction = (2,1):\n");
+Print("\n\n\n The orbit of O^2_n: \n\n\n");
+Print("\nt = 6*n-4, direction = (2,1):\n");
 
 
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n = 6*i-4
 	local res, A, b;
 	A := 
-	[ [     (6*n-2),     0,     1,     0],
-	  [   -(6*n-1),     0,     0, 0],
+	[ [     (6*t-2),     0,     1,     0],
+	  [   -(6*t-1),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -55,20 +59,20 @@ end;
 
 
 
-IntForm1 :=  [ [ -18*n^2+21*n-4, -1 ], [ 36*n^2-42*n+8, 2 ] ];
-combLength1 :=  [ 3*n-1, 6*n-1 ];
+IntForm1 :=  [ [ -18*t^2+21*t-4, -1 ], [ 36*t^2-42*t+8, 2 ] ];
+combLength1 :=  [ 3*t-1, 6*t-1 ];
 combWidths1 :=  [  2, 1  ];
-cyl1 :=  [ [ 0, 1, 3*n-2, 1 ], [ 2, 0, 2, 6*n-3 ] ];
+cyl1 :=  [ [ 0, 1, 3*t-2, 1 ], [ 2, 0, 2, 6*t-3 ] ];
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
 
-Print("n = 6*i-1, direction = (2,1):\n");
+Print("\n t = 6*n-1, direction = (2,1):\n");
 
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n = 6*i-1
 	local res, A, b;
 	A := 
-	[ [     (6*n+1),     0,     1,     0],
-	  [   -(6*n+2),     0,     0, 0],
+	[ [     (6*t+1),     0,     1,     0],
+	  [   -(6*t+2),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -77,18 +81,18 @@ ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n
 	return   CutOutMatrix(A^-1*b, 2) + IdentityMat(2);#List( [1..4], x-> (A^-1*b)[x] ) + IdentityMat(4); 
 end;
 
-IntForm1 :=  [ [ -36*n^2+6*n+4, -2 ], [ 18*n^2-3*n-2, 1 ] ];
-combLength1 :=  [ 6*n+1, 3*n+1 ];
+IntForm1 :=  [ [ -36*t^2+6*t+4, -2 ], [ 18*t^2-3*t-2, 1 ] ];
+combLength1 :=  [ 6*t+1, 3*t+1 ];
 combWidths1 :=  [  1, 2  ];
-cyl1 :=  [ [ 0, 2, 6*n-1, 2 ], [ 1, 0, 1, 3*n ] ];
+cyl1 :=  [ [ 0, 2, 6*t-1, 2 ], [ 1, 0, 1, 3*t ] ];
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n = 6*i
 	local res, A, b;
 	A := 
-	[ [     (6*n+2),     0,     1,     0],
-	  [   -(6*n+3),     0,     0, 0],
+	[ [     (6*t+2),     0,     1,     0],
+	  [   -(6*t+3),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -98,12 +102,12 @@ ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n
 end;
 
 
-Print("n = 6*i, direction = (12*n+3,1):\n");
+Print("\nt = 6*n, direction = (12*t+3,1):\n");
 
-IntForm1 :=  [ [ 36*n^2+30*n+6, -2 ], [ -18*n^2-15*n-3, 1 ] ];
-combLength1 :=  [ 6*n+3, 3*n+1 ];
+IntForm1 :=  [ [ 36*t^2+30*t+6, -2 ], [ -18*t^2-15*t-3, 1 ] ];
+combLength1 :=  [ 6*t+3, 3*t+1 ];
 combWidths1 :=  [  1, 2  ];
-cyl1 :=  [ [ 6*n+1, 6*n+3, 0, 6*n+3 ], [ 3*n+1, 3*n, 3*n+1, 0 ] ];
+cyl1 :=  [ [ 6*t+1, 6*t+3, 0, 6*t+3 ], [ 3*t+1, 3*t, 3*t+1, 0 ] ];
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
@@ -112,8 +116,8 @@ Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n = 6*i-3
 	local res, A, b;
 	A := 
-	[ [     (6*n-1),     0,     1,     0],
-	  [   -(6*n),     0,     0, 0],
+	[ [     (6*t-1),     0,     1,     0],
+	  [   -(6*t),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -122,12 +126,12 @@ ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n
 	return   CutOutMatrix(A^-1*b, 2) + IdentityMat(2);#List( [1..4], x-> (A^-1*b)[x] ) + IdentityMat(4); 
 end;
 
-Print("n = 6*i - 3, direction = (12*n-3,1):\n");
+Print("\nt = 6*n - 3, direction = (12*t-3,1):\n");
 
-IntForm1 :=  [ [ 18*n^2-3*n, -1 ], [ -36*n^2+6*n, 2 ] ];
-combLength1 :=  [ 3*n, 6*n-1 ];
+IntForm1 :=  [ [ 18*t^2-3*t, -1 ], [ -36*t^2+6*t, 2 ] ];
+combLength1 :=  [ 3*t, 6*t-1 ];
 combWidths1 :=  [  2, 1  ];
-cyl1 :=  [ [ 3*n-1, 3*n, 0, 3*n ], [ 6*n-1, 6*n-3, 6*n-1, 0 ] ];
+cyl1 :=  [ [ 3*t-1, 3*t, 0, 3*t ], [ 6*t-1, 6*t-3, 6*t-1, 0 ] ];
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
@@ -136,8 +140,8 @@ Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n = 6*i-2
 	local res, A, b;
 	A := 
-	[ [     (6*n),     0,     1,     0],
-	  [   -(6*n+1),     0,     0, 0],
+	[ [     (6*t),     0,     1,     0],
+	  [   -(6*t+1),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -146,12 +150,12 @@ ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n
 	return   CutOutMatrix(A^-1*b, 2) + IdentityMat(2);#List( [1..4], x-> (A^-1*b)[x] ) + IdentityMat(4); 
 end;
 
-Print("n = 6*i - 2, direction = (12*n-1,1):\n");
+Print("\nt = 6*n - 2, direction = (12*t-1,1):\n");
 
-IntForm1 :=  [ [ 36*n^2+6*n, -2 ], [ -18*n^2-3*n, 1 ] ];
-combLength1 :=  [ 6*n+1, 3*n ];
+IntForm1 :=  [ [ 36*t^2+6*t, -2 ], [ -18*t^2-3*t, 1 ] ];
+combLength1 :=  [ 6*t+1, 3*t ];
 combWidths1 :=  [  1, 2  ];
-cyl1 :=  [ [ 6*n-1, 6*n+1, 0, 6*n+1 ], [ 3*n, 3*n-1, 3*n, 0 ] ];
+cyl1 :=  [ [ 6*t-1, 6*t+1, 0, 6*t+1 ], [ 3*t, 3*t-1, 3*t, 0 ] ];
 
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
@@ -159,8 +163,8 @@ Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n = 6*i-5
 	local res, A, b;
 	A := 
-	[ [     (6*n-3),     0,     1,     0],
-	  [   -(6*n-2),     0,     0, 0],
+	[ [     (6*t-3),     0,     1,     0],
+	  [   -(6*t-2),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -169,12 +173,12 @@ ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) # for n
 	return   CutOutMatrix(A^-1*b, 2) + IdentityMat(2);#List( [1..4], x-> (A^-1*b)[x] ) + IdentityMat(4); 
 end;
 
-Print("n = 6*i - 5, direction = (12*n-7,1):\n");
+Print("\nt = 6*n - 5, direction = (12*t-7,1):\n");
 
-IntForm1 :=  [ [ 18*n^2-15*n+3, -1 ], [ -36*n^2+30*n-6, 2 ] ];
-combLength1 :=  [ 3*n-1, 6*n-3 ];
+IntForm1 :=  [ [ 18*t^2-15*t+3, -1 ], [ -36*t^2+30*t-6, 2 ] ];
+combLength1 :=  [ 3*t-1, 6*t-3 ];
 combWidths1 :=  [  2, 1  ];
-cyl1 :=  [ [ 3*n-2, 3*n-1, 0, 3*n-1 ], [ 6*n-3, 6*n-5, 6*n-3, 0 ] ];
+cyl1 :=  [ [ 3*t-2, 3*t-1, 0, 3*t-1 ], [ 6*t-3, 6*t-5, 6*t-3, 0 ] ];
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
@@ -185,8 +189,8 @@ Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) 
 	local res, A, b;
 	A := 
-	[ [     (3*n+1),     0,     1,     0],
-	  [   -(3*n+2),     0,     0, 0],
+	[ [     (3*s+1),     0,     1,     0],
+	  [   -(3*s+2),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -195,12 +199,12 @@ ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl)
 	return   CutOutMatrix(A^-1*b, 2) + IdentityMat(2);#List( [1..4], x-> (A^-1*b)[x] ) + IdentityMat(4); 
 end;
 
-Print("n = 3*i - 1, direction = (18*n+9,6n+2):\n");
+Print("\ns = 3*n - 1, direction = (18s+9,6s+2):\n");
 
 IntForm1 :=  [ [ -2, 0 ], [ 1, 0 ] ];
-combLength1 :=  [ 6*n-1, 2 ];
+combLength1 :=  [ 6*s-1, 2 ];
 combWidths1 :=  [  1, 2  ];
-cyl1 :=  [ [ 18*n-3, 18*n-3, 18*n^2, 18*n^2+6*n-2 ], [ 6, 6, 6*n+1, 6*n+3 ] ];
+cyl1 :=  [ [ 18*s-3, 18*s-3, 18*s^2, 18*s^2+6*s-2 ], [ 6, 6, 6*s+1, 6*s+3 ] ];
 
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
@@ -210,8 +214,8 @@ Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) 
 	local res, A, b;
 	A := 
-	[ [     (3*n+2),     0,     1,     0],
-	  [   -(3*n+3),     0,     0, 0],
+	[ [     (3*s+2),     0,     1,     0],
+	  [   -(3*s+3),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -221,25 +225,25 @@ ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl)
 end;
 
 
-Print("n = 3*i , direction = (6n+5,3n+1):\n");
+Print("\ns = 3*n , direction = (6s+5,3s+1):\n");
 
 
 
 IntForm1 :=  [ [ 1, 0 ], [ -2, 0 ] ];
-combLength1 :=  [ 2*n+3, 2*n-1 ];
+combLength1 :=  [ 2*s+3, 2*s-1 ];
 combWidths1 :=  [  2, 1  ];
-cyl1 :=  [ [ 2*n+3, 2*n+3, 3*n^2+5*n+1, 3*n^2+6*n+2 ], [ 2*n-1, 2*n-1, 3*n^2-n, 3*n^2-1 ] ];
+cyl1 :=  [ [ 2*s+3, 2*s+3, 3*s^2+5*s+1, 3*s^2+6*s+2 ], [ 2*s-1, 2*s-1, 3*s^2-s, 3*s^2-1 ] ];
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
 ## n = 3i-2
-Print("\nn = 3*i -2 , direction = (6n+1,3n-1):\n");
+Print("\ns = 3*n -2 , direction = (6s+1,3s-1):\n");
 
 ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl) 
 	local res, A, b;
 	A := 
-	[ [     (3*n+2),     0,     1,     0],
-	  [   -(3*n+3),     0,     0, 0],
+	[ [     (3*s+2),     0,     1,     0],
+	  [   -(3*s+3),     0,     0, 0],
 	  [     0,     1,     0,     1 ],
 	  [     0,    -1,     0,     0  ]
 	];
@@ -249,15 +253,15 @@ ApplyDehnTwistFormula1 := function( IntForm, CombLength, CombWidth, cyl)
 end;
 
 IntForm1 :=  [ [ 2, 0 ], [ -1, 0 ] ];
-combLength1 :=  [ 2*n+3, 2*n-1 ];
+combLength1 :=  [ 2*s+3, 2*s-1 ];
 combWidths1 :=  [  1, 2 ];
-cyl1 :=  [ [ 2*n+3, 2*n+3, 3*n^2+3*n-2, 3*n^2+4*n-1 ], [ 2*n-1, 2*n-1, 3*n^2-3*n+1, 3*n^2-2*n ] ];
+cyl1 :=  [ [ 2*s+3, 2*s+3, 3*s^2+3*s-2, 3*s^2+4*s-1 ], [ 2*s-1, 2*s-1, 3*s^2-3*s+1, 3*s^2-2*s ] ];
 
 
 Display(  ApplyDehnTwistFormula1( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 
-######################################## L2 first case #####################################################
-Print("\n\nNow L2 case 1 : Directions:  (2i+1, 1) and (d, 2i+1)\n\n\n");
+######################################## O^(3,1)_n #####################################################
+Print("\n\n\nThe orbit of O^(3,1)_n Directions:  (2n+1, 1) and (d, 2n+1)\n\n\n");
 ApplyDehnTwistFormula2 := function( IntForm, CombLength, CombWidth, cyl)
 	local res, A, b;
 	A := 
@@ -286,10 +290,10 @@ end;
 	Display(  ApplyDehnTwistFormula2( IntForm2, combLength2, combWidths2, cyl2 ) ) ;	
 
 
-###################################################### 	L2 second case #######################################################
+###################################################### 	O^(3,2)_n #######################################################
 ##dir (1,1)
-Print("L2 second case:\n");
-Print("Direction(1,1)");
+Print("\n\n\nThe orbit of O^(3,2)_n\n\n\n");
+Print("Direction(1,1):\n");
 ApplyDehnTwistFormula3 := function( IntForm, CombLength, CombWidth, cyl)
 	local res, A, b;
 	A := 
@@ -312,7 +316,7 @@ end;
 
 # dir floor...
 #n = 2*i	dir = (4n+3, 2n+1)
-Print("Now direction (4n+3, 2n+1) for n = 2i\n\n");
+Print("\nDirection (4n+3, 2n+1) for even n\n\n");
 
 ApplyDehnTwistFormula3 := function( IntForm, CombLength, CombWidth, cyl)
 	local res, A, b;
@@ -336,7 +340,7 @@ end;
 
 # n = 2*i-1 dir = (4n+1, 2n+1)
 
-Print("Now direction (4n+1, 2n+1) for n = 2i -1\n\n");
+Print("\nDirection (4n+1, 2n+1) for odd n\n\n");
 
 ApplyDehnTwistFormula3 := function( IntForm, CombLength, CombWidth, cyl)
 	local res, A, b;
@@ -361,7 +365,7 @@ end;
 
 ###################################### L3 first case #####################################################
 
-Print("The first case of L3 directions (d,1) and then (1,0)\n\n");
+Print("\n\n\nThe orbit of O^(4,1)_n directions (d,1) and then (1,0)\n\n\n");
 
 ApplyDehnTwistFormula4 := function( IntForm, CombLength, CombWidth, cyl) # erst direction (d,1)
 	local res, A, b;
@@ -395,9 +399,9 @@ end;
 
 ## direction (d,1)  Ungerade richtung:
 
-Print("Now L3 the second case\n");
+Print("\n\n\nThe orbit of O^(4,2)_n  \n\n\n");
 
-Print("direction (1,0)\n");
+Print("Direction (1,0)\n");
 
 ApplyDehnTwistFormula5 := function( IntForm, CombLength, CombWidth, cyl) # 
 	local res, A, b;
@@ -422,7 +426,7 @@ end;
 	Display(  ApplyDehnTwistFormula5( IntForm1, combLength1, combWidths1, cyl1 ) ) ;
 	
 ## direction (d,1)  Gerade richtung:
-Print("Direction (d,1) for n = 2i:\n");
+Print("\nDirection (d,1) for even n:\n");
 
 ApplyDehnTwistFormula6 := function( IntForm, CombLength, CombWidth, cyl) # erst direction (d,1)
 	local res, A, b;
@@ -446,7 +450,7 @@ end;
 
 
 ################ direction (1,0)
-Print("Direction (d,1) for n = 2i-1:\n");
+Print("\nDirection (d,1) for odd n:\n");
 ApplyDehnTwistFormula7 := function( IntForm, CombLength, CombWidth, cyl) #
 	local res, A, b;
 	A := 
@@ -467,10 +471,3 @@ end;
 	
 	Display(  ApplyDehnTwistFormula7( IntForm3, combLength3, combWidths3, cyl3 ) ) ;		
 
-S := [[0, -1],[1, 0]];
-T :=  [[1, 1],[0, 1]];
-f := -18*n^2+ 15*n-3;
-g := -f-1;
--S *[[1, f],[0,1]]* (-S)*T *(-S)*T^-1*(-S)*[[1,g],[0,1]]* (-S);
--S *[[1, f],[0,1]]* (-S)*T^-1 *(-S)*T*(-S)*[[1,g],[0,1]]* (-S);
-f := [ 18*n^2-21*n+3, 18*n^2-3*n-3, -18*n^2-15*n-3, -18*n^2+3*n, -18*n^2-3*n, -18*n^2+15*n-3 ];
